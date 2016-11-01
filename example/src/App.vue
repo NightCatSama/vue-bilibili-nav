@@ -31,7 +31,7 @@ export default {
 				number: 1,
 				name: '番剧',
 				pingyin: 'FanJu',
-				color: 'bg-yellow'
+				color: 'bg-light-black'
 			}, {
 				number: 2,
 				name: '游戏',
@@ -140,13 +140,6 @@ export default {
 		@include flex-center;
 		flex-direction: column;
 		margin-bottom: 20px;
-
-		// $li-colors: ($blue, $yellow, $green, $roseate, $light-blue, $gray, $brown, $sliver, $dark-red, $dark-green, $orange, $pink);
-		// @for $i from 1 through 12 {
-		// 	&:nth-child(#{$i}) {
-		// 		background-color: nth($li-colors, $i);
-		// 	}
-		// }
 	}
 }
 
@@ -155,12 +148,12 @@ footer {
 	width: 100%;
 	@include flex-center;
 	color: $white;
-	background-color: $font-color;
+	background-color: $light-gray;
 
 	a {
 		text-decoration: none;
 		font-size: 60px;
-		color: $white;
+		color: $font-color;
 	}
 }
 </style>
