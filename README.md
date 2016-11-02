@@ -7,7 +7,7 @@
 
 ```js
 let options = {
-	offset: 150,          //  偏移值
+	offset: 150,          //  滚动监测偏移值
 	bindData: this.data,  //  绑定可排序数组数据
 	backToTop: 0,         //  距离顶部多少距离时显示backtotop按钮
 	data: [{              //  导航条数据，基于this.data生成
