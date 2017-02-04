@@ -17,16 +17,14 @@ const scrollTo = (end, time = 800) => {
 			if (start === null) start = timeStamp
 			let progress = timeStamp - start
 			if (progress < time) {
-				if (document.documentElement.scrollTop) {
-					document.documentElement.scrollTop = Quad_easeIn(progress, b, c, d)
-				}
-				else {
-					document.body.scrollTop = Quad_easeIn(progress, b, c, d)
-				}
+				let st = Quad_easeIn(progress, b, c, d)
+				document.body.scrollTop = st
+				document.documentElement.scrollTop = st
 				window.requestAnimationFrame(step)
 			}
 			else {
 				document.body.scrollTop = end
+				document.documentElement.scrollTop = end
 				resolve(end)
 			}
 		}
@@ -42,7 +40,7 @@ const scrollToTop = (time) => {
 
 //  滚动到某元素
 const scrollToElem = (elem, time, offset) => {
-	let top = elem.getBoundingClientRect().top  + ( window.pageYOffset || document.documentElement.scrollTop )  - ( document.documentElement.clientTop  || 0 )
+	let top = elem.getBoundingClientRect().top  + ( window.pageYOffset || document.documentElement.scrollTop )  - ( document.documentElement.clientTop || 0 )
 	return scrollTo(top - (offset || 0), time)
 }
 

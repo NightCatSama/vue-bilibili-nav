@@ -120,6 +120,7 @@ export default {
 		}
 	},
 	methods: {
+		/*  初始化  */
 		init() {
 			this.getData()
 			this.bindEvent()
@@ -127,6 +128,7 @@ export default {
 			this._left = this.$refs.ul.getBoundingClientRect().left
 			this._top = this.$refs.ul.getBoundingClientRect().top
 		},
+		/*  点击设置当前区域  */
 		setActive(i, bool) {
 			if (i === this.current || (!bool && this.mode === 'sortable'))
 				return false
@@ -141,21 +143,25 @@ export default {
 				}
 			})
 		},
+		/*  绑定事件  */
 		bindEvent() {
 			document.addEventListener('scroll', this.scroll, false)
 			document.addEventListener('mousemove', this.dragMove, false)
 			document.addEventListener('mouseup', this.dragEnd, false)
 			document.addEventListener('mouseleave', this.dragEnd, false)
 		},
+		/*  解除绑定事件  */
 		unbindEvent() {
 			document.removeEventListener('scroll', this.scroll, false)
 			document.removeEventListener('mousemove', this.dragMove, false)
 			document.removeEventListener('mouseup', this.dragEnd, false)
 			document.removeEventListener('mouseleave', this.dragEnd, false)
 		},
+		/*  切换模式  */
 		toggleMode() {
 			this.mode = this.mode === 'navigation' ? 'sortable' : 'navigation'
 		},
+		/*  配置初始数据  */
 		getData() {
 			this.data = sortArr(Array.from(this.options.data, (obj) => {
 				let elem = document.getElementById(obj.target)
@@ -170,13 +176,16 @@ export default {
 				}
 			}), 'offsetTop')
 		},
+		/*  滚动时同步设置this.scrollTop  */
 		scroll(e) {
-			this.scrollTop = document.body.scrollTop
+			this.scrollTop = window.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop)
 		},
+		/*  得到鼠标位置  */
 		getPos(e) {
 			this.x = e.clientX - this._left - this.offsetX
 			this.y = e.clientY - this._top - this.offsetY
 		},
+		/*  拖拽开始  */
 		dragStart(e, i) {
 			if (this.mode === 'navigation')
 				return false
@@ -186,12 +195,14 @@ export default {
 			this.offsetY = e.offsetY
 			this.getPos(e)
 		},
+		/*  拖拽中得到鼠标位置  */
 		dragMove(e) {
 			if (this.isDrag) {
 				this.getPos(e)
 			}
 			e.preventDefault()
 		},
+		/*  排序拖拽结束  */
 		dragEnd(e) {
 			if (this.isDrag) {
 				this.isDrag = false
