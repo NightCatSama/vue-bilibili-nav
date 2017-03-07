@@ -377,7 +377,7 @@ $ul-zIndex: 9;
 	}
 
 	.tip {
-		background: url(../assets/tab2233.png) 0 0 no-repeat;
+		background: url(http://p1.bqimg.com/567571/f0b9b188ab580a2b.png) 0 0 no-repeat;
 		position: absolute;
 		left: -117px;
 		top: 0;
