@@ -3,7 +3,7 @@
 
 [live demo](https://nightcatsama.github.io/vue-bilibili-nav/example/dist/)
 
-##options
+## options
 
 ```js
 let options = {
