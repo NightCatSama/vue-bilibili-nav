@@ -59,7 +59,7 @@ export default {
 			queueNumber: 0,
 			scrollTop: 0,
 			isDrag: false,
-			dragId: 0,
+			dragId: 0,  //  拖拽的id
 			x: 0,
 			y: 0,
 			offsetX: 0,
@@ -72,9 +72,11 @@ export default {
 		}
 	},
 	computed: {
+		//  偏移值
 		offset: function() {
-			return this.options.offset || 0
+			return this.options.offset || 100
 		},
+		//  动态当前值（根据滚动距离判断）
 		active: function() {
 			if (this.noInScope) {
 				return false
@@ -87,15 +89,18 @@ export default {
 			}
 			return active
 		},
+		//  静态当前值（如果在点击滚动过程中则为目标值）
 		current: function() {
 			return this.isClickScroll ? this.targetValue : this.active
 		},
+		//  是否在滚动检测的范围中
 		noInScope: function() {
 			if (!this.data.length || this.scrollTop < (this.data[0].offsetTop - this._screenHeight) || this.scrollTop > this.data[this.data.length - 1].offsetTop + this.data[this.data.length - 1].height) {
 				return true
 			}
 			return false;
 		},
+		//  要交换的目标ID
 		exchangeId: function() {
 			let id = Math.floor(this.y / this.height)
 			if (id > this.data.length - 1)
@@ -104,6 +109,7 @@ export default {
 				id = 0
 			return id
 		},
+		//  鼠标位置 => 拖拽体的位置style
 		dragStyles: function() {
 			return {
 				left: `${this.x}px`,
@@ -112,6 +118,7 @@ export default {
 		}
 	},
 	watch: {
+		//  根据options变化做出改变
 		options: {
 			deep: true,
 			handler: function(newVal, oldVal) {
@@ -169,10 +176,10 @@ export default {
 					return console.error(`[vue-sortable-nav]: Unable to find the corresponding elements(Please make sure that there is id for the elements of ["${obj.target}]")`)
 				let offsetTop = getOffsetTop(elem)
 				return {
-					name: obj.name,
-					elem: elem,
-					offsetTop: offsetTop,
-					height: elem.offsetHeight
+					name: obj.name,  //  名字
+					elem: elem,  //  对应的元素
+					offsetTop: offsetTop,  //  距离页面顶部的距离
+					height: elem.offsetHeight   //  元素的高度
 				}
 			}), 'offsetTop')
 		},
@@ -189,6 +196,7 @@ export default {
 		dragStart(e, i) {
 			if (this.mode === 'navigation')
 				return false
+
 			this.isDrag = true
 			this.dragId = i
 			this.offsetX = e.offsetX

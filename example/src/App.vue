@@ -1,20 +1,24 @@
 <template>
 	<div id="app">
 		<ul class="section white">
-			<li v-for="(item, index) in data" :id="'section' + index" :class="item.color">
+			<li v-for="(item, index) in data" :id="`section${index}`" :class="item.color">
 				<h3>{{ item.name }}</h3>
-				<p>{{ item.pingyin }}</p>
+				<p>{{ item.spell }}</p>
 			</li>
 		</ul>
 		<footer>
-			<a href="https://github.com/NightCatSama">NightCat</a>
+			<a href="https://github.com/NightCatSama">
+				NightCat
+			</a>
+			<small>此区域用于测试超出导航范围</small>
 		</footer>
 		<sortable-nav :options="options"></sortable-nav>
 	</div>
 </template>
 
 <script>
-import sortableNav from 'components/index.js'
+import sortableNav from 'components/'
+
 export default {
 	name: 'app',
 	components: {
@@ -25,67 +29,68 @@ export default {
 			data: [{
 				number: 0,
 				name: '动画',
-				pingyin: 'DongHua',
+				spell: 'DongHua',
 				color: 'bg-blue'
 			}, {
 				number: 1,
 				name: '番剧',
-				pingyin: 'FanJu',
+				spell: 'FanJu',
 				color: 'bg-light-black'
 			}, {
 				number: 2,
 				name: '游戏',
-				pingyin: 'YouXi',
+				spell: 'YouXi',
 				color: 'bg-green'
 			}, {
 				number: 3,
 				name: '鬼畜',
-				pingyin: 'GuiChu',
+				spell: 'GuiChu',
 				color: 'bg-roseate'
 			}, {
 				number: 4,
 				name: '音乐',
-				pingyin: 'YinYue',
+				spell: 'YinYue',
 				color: 'bg-light-blue'
 			}, {
 				number: 5,
 				name: '舞蹈',
-				pingyin: 'WuDao',
+				spell: 'WuDao',
 				color: 'bg-gray'
 			}, {
 				number: 6,
 				name: '科技',
-				pingyin: 'KeJi',
+				spell: 'KeJi',
 				color: 'bg-brown'
 			}, {
 				number: 7,
 				name: '生活',
-				pingyin: 'ShengHuo',
+				spell: 'ShengHuo',
 				color: 'bg-sliver'
 			}, {
 				number: 8,
 				name: '广告',
-				pingyin: 'GuangGao',
+				spell: 'GuangGao',
 				color: 'bg-dark-red'
 			}, {
 				number: 9,
 				name: '直播',
-				pingyin: 'ZhiBo',
+				spell: 'ZhiBo',
 				color: 'bg-dark-green'
 			}, {
 				number: 10,
 				name: 'TV剧',
-				pingyin: 'TVJu',
+				spell: 'TVJu',
 				color: 'bg-orange'
 			}, {
 				number: 11,
 				name: '电影',
-				pingyin: 'DianYing',
+				spell: 'DianYing',
 				color: 'bg-pink'
 			}]
 		}
 	},
 	watch: {
+		//  保存位置到localStorage
 		data: function(arr) {
 			let cache = Array.from(arr, (obj) => obj.number)
 			window.localStorage['nav'] = JSON.stringify(cache)
@@ -93,11 +98,13 @@ export default {
 	},
 	computed: {
 		options: function() {
+			//  导航配置
 			let options = {
-				offset: 150,
-				bindData: this.data,
+				offset: 150,  //  滚动检测偏移值
+				bindData: this.data,  //  与this.data绑定值
 				backToTop: 0
 			}
+			//  根据this.data生成导航的配置[{ name: 名字, target: 对应的元素id }]
 			options.data = this.data.map((obj, i) => {
 				return {
 					name: obj.name,
@@ -108,6 +115,7 @@ export default {
 		}
 	},
 	mounted() {
+		//  从localStorage读取this.data
 		let cache = window.localStorage['nav']
 		if (cache) {
 			cache = JSON.parse(cache)
@@ -147,13 +155,18 @@ footer {
 	height: 1000px;
 	width: 100%;
 	@include flex-center;
+	flex-direction: column;
 	color: $white;
 	background-color: $light-gray;
 
 	a {
 		text-decoration: none;
 		font-size: 60px;
-		color: $font-color;
+		color: $dark-blue;
+	}
+
+	small {
+		font-size: 22px;
 	}
 }
 </style>
