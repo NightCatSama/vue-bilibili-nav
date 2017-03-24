@@ -1,7 +1,7 @@
 # vue-bilibili-nav
 使用vue2仿写bilibili的侧边导航
 
-[live demo](https://nightcatsama.github.io/vue-bilibili-nav/)
+[live demo](https://nightcatsama.github.io/vue-bilibili-nav/example/dist/)
 
 ##options
 
